@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 
 interface LayoutProps {
   children: ReactNode;
-  sidebar: ReactNode;
-  modal: ReactNode;
+  sidebar?: ReactNode;
+  modal?: ReactNode;
 }
 
 export default function RootLayout({
@@ -43,7 +43,7 @@ export default function RootLayout({
               </aside>
               <div className="flex-1">
                 {children}
-                {modal} {/* <-- ДОДАЙТЕ ОЦЕЙ РЯДОК! */}
+                {modal}
               </div>
             </div>
           </main>
