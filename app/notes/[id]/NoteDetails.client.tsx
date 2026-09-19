@@ -1,38 +1,61 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { fetchNoteById } from '../../../lib/api';
 import css from './NoteDetails.module.css';
 
 export default function NoteDetailsClient() {
   const params = useParams();
+  const router = useRouter();
   const id = params.id as string;
 
   const { data: note, isLoading, isError } = useQuery({
     queryKey: ['note', id],
     queryFn: () => fetchNoteById(id),
-    refetchOnMount: false, 
+    refetchOnMount: false,
   });
 
   if (isLoading) {
-    return <p>Loading, please wait...</p>;
+    return <p className={css.status}>Loading, please wait...</p>;
   }
 
   if (isError || !note) {
-    return <p>Something went wrong.</p>;
+    return <p className={css.status}>Something went wrong.</p>;
   }
 
   return (
     <main className={css.main}>
       <div className={css.container}>
         <div className={css.item}>
+          {/* Кнопка Back із навігацією назад */}
+          <button 
+            type="button" 
+            className={css.backBtn} 
+            onClick={() => router.back()}
+          >
+            Back
+          </button>
+
           <div className={css.header}>
             <h2>{note.title}</h2>
           </div>
-          <p className={css.tag}>{note.tag}</p>
+
+          {note.tag && (
+            <div className={css.tagWrapper}>
+              <span className={css.tag}>{note.tag}</span>
+            </div>
+          )}
+
           <p className={css.content}>{note.content}</p>
-          <p className={css.date}>{new Date(note.createdAt).toLocaleDateString()}</p>
+
+          {note.createdAt && (
+            <div className={css.dateWrapper}>
+              <span className={css.date}>
+                {new Date(note.createdAt).toLocaleDateString()}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </main>
