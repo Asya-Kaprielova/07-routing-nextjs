@@ -3,8 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
 import { fetchNoteById } from '@/lib/api';
-import Modal from '@/components/Modal/Modal'; // перевірте шлях до вашого Modal
-import css from './NotePreview.module.css'; // або відносний шлях до ваших стилів
+import Modal from '@/components/Modal/Modal';
+import css from './NotePreview.module.css';
 
 export default function NotePreviewClient() {
   const params = useParams();
