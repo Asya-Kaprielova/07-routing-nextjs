@@ -23,21 +23,31 @@ export default function NotePreviewClient() {
 
   return (
     <Modal onClose={handleClose}>
-      {isLoading && <p>Loading, please wait...</p>}
-      {isError && <p>Something went wrong.</p>}
+      <div className={css.container}>
+        <button 
+          type="button" 
+          className={css.backBtn} 
+          onClick={handleClose}
+        >
+          Back
+        </button>
 
-      {note && (
-        <div className={css.item}>
-          <h2>{note.title}</h2>
-          {note.tag && <p className={css.tag}>{note.tag}</p>}
-          <p className={css.content}>{note.content}</p>
-          {note.createdAt && (
-            <p className={css.date}>
-              {new Date(note.createdAt).toLocaleDateString()}
-            </p>
-          )}
-        </div>
-      )}
+        {isLoading && <p>Loading, please wait...</p>}
+        {isError && <p>Something went wrong.</p>}
+
+        {note && (
+          <div className={css.item}>
+            <h2>{note.title}</h2>
+            {note.tag && <p className={css.tag}>{note.tag}</p>}
+            <p className={css.content}>{note.content}</p>
+            {note.createdAt && (
+              <p className={css.date}>
+                {new Date(note.createdAt).toLocaleDateString()}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
     </Modal>
   );
 }
