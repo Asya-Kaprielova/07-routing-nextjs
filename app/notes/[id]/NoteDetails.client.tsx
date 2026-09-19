@@ -28,7 +28,6 @@ export default function NoteDetailsClient() {
     <main className={css.main}>
       <div className={css.container}>
         <div className={css.item}>
-          {/* Кнопка Back із навігацією назад */}
           <button 
             type="button" 
             className={css.backBtn} 
